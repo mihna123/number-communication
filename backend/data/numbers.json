@@ -1,0 +1,28 @@
+[
+    {
+        "id": 0,
+        "number": 69,
+        "parent": null,
+        "user": "mihna123",
+        "responses": [
+            1,
+            2
+        ]
+    },
+    {
+        "id": 1,
+        "number": 420,
+        "parent": 0,
+        "operation": "+",
+        "user": "mihna123",
+        "responses": []
+    },
+    {
+        "id": 2,
+        "number": 100,
+        "parent": 0,
+        "operation": "/",
+        "user": "mihna123",
+        "responses": []
+    }
+]
