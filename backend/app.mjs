@@ -1,10 +1,19 @@
 import express from 'express';
+import * as PostsService from './services/post.service.mjs'
 
 const app = express();
 const port = 3000;
 
-app.get('/', (req, res) => {
-    res.send('Hello World!');
+app.get('/posts', async (_, res) => {
+    const posts = await PostsService.getAllPosts();
+    console.log(posts);
+    res.json(posts);
+});
+
+app.post('/posts', async (req, res) => {
+    const newPost = req.body;
+    const posts = await PostsService.addPost(newPost);
+    res.json(posts);
 });
 
 app.listen(port, () => {
