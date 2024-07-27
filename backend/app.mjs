@@ -4,9 +4,10 @@ import * as PostsService from './services/post.service.mjs'
 const app = express();
 const port = 3000;
 
+app.use(express.json());
+
 app.get('/posts', async (_, res) => {
     const posts = await PostsService.getAllPosts();
-    console.log(posts);
     res.json(posts);
 });
 
