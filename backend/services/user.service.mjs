@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt";
 import { UserModel } from "../models/user.model.mjs";
-import * as jwt from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 
 const createUser = async (user) => {
     const hash = await bcrypt.hash(user.password, 10);
@@ -8,7 +8,7 @@ const createUser = async (user) => {
     return UserModel.create({ ...user });
 }
 
-//tokenBody has id: number and username:string
+//tokenBody has _id: ObjectId and username:string
 const generateToken = (tokenBody) => {
     // Token lasts 5h
     const tokenExpire = Date.now() + 1000 * 3600 * 5

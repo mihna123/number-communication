@@ -12,7 +12,7 @@ const UserSchema = new Schema({
     }
 });
 
-UserSchema.method.isPassValid = async (pass) => {
+UserSchema.methods.isPassValid = async (pass) => {
     const user = this;
     const result = await bcrypt.compare(pass, user.password);
     return result;
