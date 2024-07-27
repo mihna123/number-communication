@@ -1,8 +1,8 @@
+import 'dotenv/config';
 import express from 'express';
 import { ExpressAuth } from '@auth/express';
 import Google from "@auth/express/providers/google";
 import * as PostsService from './services/post.service.mjs'
-
 
 const app = express();
 const port = 3000;
