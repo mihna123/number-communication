@@ -1,2 +1,5 @@
 #node modules is huuge
 node_modules
+
+#this is for local dev only
+curl_tests
