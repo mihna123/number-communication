@@ -22,11 +22,13 @@ const getUserByToken = (token) => {
     return user;
 }
 
+const getUsernameById = async (userId) => {
+    const user = await UserModel.findOne({ _id: userId });
+    return user.username;
+}
+
 const getUserByUsername = async (username) => {
     const user = await UserModel.findOne({ username });
-    if (!user) {
-        throw new Error(`There is no user with username: ${username}`);
-    }
     return user;
 }
 
@@ -34,7 +36,8 @@ export {
     createUser,
     generateToken,
     getUserByToken,
-    getUserByUsername
+    getUserByUsername,
+    getUsernameById
 };
 
 

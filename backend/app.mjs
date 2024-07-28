@@ -2,13 +2,14 @@ import 'dotenv/config';
 import express from 'express';
 import mongoose from 'mongoose';
 import cookieParser from 'cookie-parser';
+import cors from 'cors';
 import bcrypt from 'bcrypt';
 import { authorizationGuard } from './middleware/auth.middleware.mjs';
 import * as PostsService from './services/post.service.mjs';
 import * as UserService from './services/user.service.mjs';
 
 const app = express();
-const port = 3000;
+const port = 8080;
 const mongoUri = process.env.MONGO_URI;
 
 const clientOptions = {
@@ -18,6 +19,11 @@ const clientOptions = {
         deprecationErrors: true
     }
 };
+
+const corsOptions = {
+    origin: 'http://localhost:3000',
+    credentials: true
+}
 
 try {
     await mongoose.connect(mongoUri, clientOptions);
@@ -29,6 +35,7 @@ try {
 
 app.use(cookieParser());
 app.use(express.json());
+app.use(cors(corsOptions));
 
 app.post('/auth/signup', async (req, res) => {
     const { username, password, repeatedPassword } = req.body;
@@ -43,13 +50,16 @@ app.post('/auth/signup', async (req, res) => {
 app.post('/auth/login', async (req, res) => {
     const { username, password } = req.body;
     const user = await UserService.getUserByUsername(username);
-
     if (!user) {
-        throw new Error(`Username ${username} doesn't exist!`);
+        return res.status(404).json({
+            error: `User with username ${username} doesn't exist!`
+        });
     }
     const valid = await bcrypt.compare(password, user.password);
     if (!valid) {
-        throw new Error(`Incorect password!`);
+        return res.status(404).json({
+            error: `Incorect password!`
+        });
     }
 
     const tokenBody = { _id: user._id, username: user.username };
@@ -78,6 +88,12 @@ app.post('/posts', authorizationGuard, async (req, res) => {
     const posts = await PostsService.addPost(newPost);
     res.json(posts);
 });
+
+app.get('/users/:userId', async (req, res) => {
+    const { userId } = req.params;
+    const username = await UserService.getUsernameById(userId);
+    res.json({ username });
+})
 
 app.listen(port, () => {
     console.log(`Listening on port ${port}...`);

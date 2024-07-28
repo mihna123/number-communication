@@ -1,0 +1,4 @@
+.reply-controlls {
+    display: flex;
+    justify-content: space-evenly;
+}

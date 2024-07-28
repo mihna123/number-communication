@@ -1,0 +1,17 @@
+.post-container {
+    padding: 15px;
+    margin: 15px 0;
+}
+
+.post-container h2 {
+    margin-left: 20px;
+}
+
+
+.post-controlls {
+    display: flex;
+}
+
+.post-controlls p {
+    font-size: 0.85rem;
+}

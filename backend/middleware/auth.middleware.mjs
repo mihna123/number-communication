@@ -2,8 +2,9 @@ import jwt from 'jsonwebtoken';
 import * as UserService from '../services/user.service.mjs';
 
 export const authorizationGuard = async (req, res, next) => {
-    const { token } = req.cookies;
-    if (!(token && req.cookies)) {
+    const { token } = req.body;
+    console.log(req.body);
+    if (!token) {
         res.status(401).json({ error: "You are not logged in!" });
         return;
     }
