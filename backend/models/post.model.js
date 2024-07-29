@@ -1,4 +1,5 @@
-import mongoose, { Schema, SchemaTypes } from "mongoose";
+const mongoose = require("mongoose");
+const { Schema, SchemaTypes } = require("mongoose");
 
 const postSchema = new Schema({
     number: Number,
@@ -8,4 +9,5 @@ const postSchema = new Schema({
     responses: [SchemaTypes.ObjectId]
 });
 
-export const PostModel = mongoose.model('posts', postSchema);
+const PostModel = mongoose.model('posts', postSchema);
+module.exports = PostModel;

@@ -1,6 +1,6 @@
-import express from "express";
-import bcrypt from 'bcrypt';
-import * as UserService from '../services/user.service.mjs';
+const express = require("express");
+const bcrypt = require('bcrypt');
+const UserService = require('../services/user.service.js');
 
 const authRouter = express.Router();
 
@@ -45,4 +45,4 @@ authRouter.post('/login', async (req, res) => {
         });
 });
 
-export default authRouter;
+module.exports = authRouter;

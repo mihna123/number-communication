@@ -1,4 +1,5 @@
-import mongoose, { Schema } from "mongoose";
+const mongoose = require("mongoose");
+const { Schema } = require("mongoose");
 
 const UserSchema = new Schema({
     username: {
@@ -18,4 +19,7 @@ UserSchema.methods.isPassValid = async (pass) => {
     return result;
 };
 
-export const UserModel = mongoose.model('users', UserSchema);
+const UserModel = mongoose.model('users', UserSchema);
+module.exports = {
+    UserModel,
+}

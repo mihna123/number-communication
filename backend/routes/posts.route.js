@@ -1,6 +1,6 @@
-import express from "express";
-import * as PostsService from '../services/post.service.mjs';
-import { authorizationGuard } from "../middleware/auth.middleware.mjs";
+const express = require("express");
+const PostsService = require('../services/post.service.js');
+const authorizationGuard = require("../middleware/auth.middleware.js");
 
 const postsRoute = express.Router();
 
@@ -21,4 +21,4 @@ postsRoute.post('/reply', authorizationGuard, async (req, res) => {
     res.status(200).json(allPosts);
 });
 
-export default postsRoute;
+module.exports = postsRoute;

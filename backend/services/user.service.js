@@ -1,6 +1,6 @@
-import bcrypt from "bcrypt";
-import { UserModel } from "../models/user.model.mjs";
-import jwt from "jsonwebtoken";
+const bcrypt = require("bcrypt");
+const { UserModel } = require("../models/user.model.js");
+const jwt = require("jsonwebtoken");
 
 const createUser = async (user) => {
     const hash = await bcrypt.hash(user.password, 10);
@@ -32,7 +32,7 @@ const getUserByUsername = async (username) => {
     return user;
 }
 
-export {
+module.exports = {
     createUser,
     generateToken,
     getUserByToken,

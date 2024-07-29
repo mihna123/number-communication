@@ -1,4 +1,4 @@
-import { PostModel } from '../models/post.model.mjs';
+const PostModel = require('../models/post.model.js');
 
 const getAllPosts = async () => {
     const allPosts = await PostModel.find({});
@@ -23,7 +23,7 @@ const replyToPost = async (replyData) => {
     return getAllPosts();
 };
 
-export {
+module.exports = {
     getAllPosts,
     addPost,
     replyToPost,

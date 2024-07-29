@@ -9,6 +9,10 @@
         "mongoose": "^8.5.1"
     },
     "scripts": {
-        "build": "node app.mjs"
+        "build": "npm i",
+        "start": "node app.mjs"
+    },
+    "devDependencies": {
+        "babel-cli": "^6.26.0"
     }
 }
