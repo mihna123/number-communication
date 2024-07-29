@@ -1,9 +1,13 @@
 services: 
-  front:
+  frontend:
+    image: mihna123/numbers-front
     build: ./frontend/
     ports:
-      - "3000:80"
-  back:
+      - "80:80"
+    depends_on:
+      - backend
+  backend:
+    image: mihna123/numbers-back
     build: ./backend/
     ports: 
       - "8080:8080"
