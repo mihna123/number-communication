@@ -38,7 +38,7 @@ const AddModalPage = ({ closeModal }) => {
         }).then(res => {
             if (res.status === 200) {
                 closeModal();
-                alert('Successfuly replied!');
+                alert('Successfuly posted!');
             }
 
             return res.json();

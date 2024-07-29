@@ -1,0 +1,11 @@
+services: 
+  front:
+    build: ./frontend/
+    ports:
+      - "3000:80"
+  back:
+    build: ./backend/
+    ports: 
+      - "8080:8080"
+
+

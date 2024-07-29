@@ -6,7 +6,7 @@ import { getRepliesToPost } from "../../data/posts";
 import ReplyModal from "../reply-modal-page/ReplyModal";
 import "./Post.css";
 
-const Post = ({ postData, padLeft }) => {
+const Post = ({ postData, padLeft, accumulated }) => {
     const [replyOpen, setReplyOpen] = useState(false);
     const [username, setUsername] = useState('someone');
     const user = currentUser.use();
@@ -20,6 +20,21 @@ const Post = ({ postData, padLeft }) => {
                 setUsername(data.username);
             })
     }, [postData]);
+
+    const getNextValue = () => {
+        switch (postData.operation) {
+            case "+":
+                return postData.number + accumulated;
+            case "-":
+                return accumulated - postData.number;
+            case "*":
+                return postData.number * accumulated;
+            case "/":
+                return accumulated / postData.number;
+            default:
+                return postData.number;
+        }
+    }
 
     const replyClick = () => {
         if (!user.loggedIn) {
@@ -44,7 +59,7 @@ const Post = ({ postData, padLeft }) => {
                     : <p><b>{username}</b> replied: </p>
                 }
 
-                <h2>{postData.operation ?? ""} {postData.number}</h2>
+                <h2>{postData.operation ?? ""} {postData.number} {accumulated ? ` = ${getNextValue()}` : ""}</h2>
                 <section className="post-controlls">
                     <Button onClick={replyClick}>Reply</Button>
                     <p>number of replies: {postData.responses.length ?? 0}</p>
@@ -53,7 +68,7 @@ const Post = ({ postData, padLeft }) => {
 
             {
                 replies.map((rep, i) => {
-                    return <Post padLeft={(padLeft ?? 0) + 5} postData={rep} key={i} />
+                    return <Post padLeft={(padLeft ?? 0) + 5} accumulated={getNextValue()} postData={rep} key={i} />
                 })}
         </div>
     )
