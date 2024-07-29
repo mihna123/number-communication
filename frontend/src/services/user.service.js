@@ -10,7 +10,6 @@ class UserService {
             _id: decodedToken.user._id,
             token: token
         });
-        console.log(token);
     }
 }
 

@@ -2,13 +2,11 @@ import { Card, CardContent, Button, CardActions, CardHeader, IconButton, Select,
 import TextField from "@mui/material/TextField";
 import { Close } from "@mui/icons-material";
 import { useState } from "react";
-import "./ReplyModal.css";
 import { currentUser } from "../../data/user";
 import { posts } from "../../data/posts";
 
-const ReplyModal = ({ closeModal, parentId }) => {
+const AddModalPage = ({ closeModal }) => {
     const [num, setNum] = useState(0);
-    const [op, setOp] = useState("+")
     const [numError, setNumError] = useState(false);
     const [numHelper, setNumHelper] = useState("");
     const user = currentUser.use();
@@ -23,22 +21,16 @@ const ReplyModal = ({ closeModal, parentId }) => {
         setNumHelper("");
         setNum(e.target.value);
     }
-    const handleSelect = (e) => {
-        setOp(e.target.value);
-    }
-
-    const reply = () => {
-        fetch('http://localhost:8080/posts/reply', {
+    const postNew = () => {
+        fetch('http://localhost:8080/posts/', {
             method: "POST",
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                reply: {
+                post: {
                     number: num,
-                    operation: op,
-                    parent: parentId,
                     userId: user._id,
                 },
                 token: user.token
@@ -51,6 +43,7 @@ const ReplyModal = ({ closeModal, parentId }) => {
 
             return res.json();
         }).then(data => {
+            console.log(data);
             posts.set(data);
         }).catch(err => {
             console.error(err);
@@ -60,8 +53,8 @@ const ReplyModal = ({ closeModal, parentId }) => {
     return (
         <Card className="main-container" variant="outlined">
             <CardHeader
-                title="Reply to someone"
-                subheader="Add any number and an operation"
+                title="Add a new number"
+                subheader="It can be any number!"
                 action={
                     <IconButton onClick={closeModal}>
                         <Close />
@@ -69,14 +62,6 @@ const ReplyModal = ({ closeModal, parentId }) => {
                 } />
             <CardContent>
                 <section className="reply-controlls">
-                    <Select
-                        value={op}
-                        onChange={handleSelect}>
-                        <MenuItem value={"+"}>+</MenuItem>
-                        <MenuItem value={"-"}>-</MenuItem>
-                        <MenuItem value={"*"}>*</MenuItem>
-                        <MenuItem value={"/"}>/</MenuItem>
-                    </Select>
                     <TextField
                         className="input-number"
                         type="number"
@@ -85,11 +70,11 @@ const ReplyModal = ({ closeModal, parentId }) => {
                         onChange={handleNumChange} />
                 </section>
                 <CardActions disableSpacing>
-                    <Button id="login-btn" variant="contained" onClick={reply}>Reply</Button>
+                    <Button id="login-btn" variant="contained" onClick={postNew}>Post</Button>
                 </CardActions>
             </CardContent>
         </Card>
     )
 }
 
-export default ReplyModal;
+export default AddModalPage;
