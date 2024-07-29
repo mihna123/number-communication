@@ -3,6 +3,7 @@ import Modal from "@mui/material/Modal";
 import { useEffect, useState } from "react";
 import { currentUser } from "../../data/user";
 import { getRepliesToPost } from "../../data/posts";
+import { url } from "../../data/url";
 import ReplyModal from "../reply-modal-page/ReplyModal";
 import "./Post.css";
 
@@ -13,7 +14,7 @@ const Post = ({ postData, padLeft, accumulated }) => {
     const replies = getRepliesToPost(postData._id);
     useEffect(() => {
         if (!postData.userId) return;
-        fetch(`http://localhost:8080/users/${postData.userId}`, {
+        fetch(`${url}/users/${postData.userId}`, {
         })
             .then(res => res.json())
             .then(data => {

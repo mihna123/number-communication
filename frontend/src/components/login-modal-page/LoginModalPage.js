@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Close } from "@mui/icons-material";
 import "./LoginModalPage.css";
 import UserService from "../../services/user.service";
-
+import { url } from "../../data/url";
 
 const LoginModalPage = ({ closeModal }) => {
     const [username, setUsername] = useState('');
@@ -53,7 +53,7 @@ const LoginModalPage = ({ closeModal }) => {
         setPasswordError(false);
 
         fetch(
-            'http://localhost:8080/auth/login', {
+            `${url}/auth/login`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',

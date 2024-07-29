@@ -6,6 +6,7 @@ import { Button } from '@mui/material';
 import Modal from "@mui/material/Modal";
 import AddModalPage from '../add-modal-page/AddModalPage';
 import { currentUser } from '../../data/user';
+import { url } from '../../data/url';
 
 const NumberPosts = () => {
     const [addNewVisible, setAddNewVisible] = useState(false);
@@ -26,7 +27,7 @@ const NumberPosts = () => {
     }
 
     useEffect(() => {
-        fetch('http://localhost:8080/posts')
+        fetch(`${url}/posts`)
             .then(response => response.json())
             .then(data => {
                 posts.set([...data]);

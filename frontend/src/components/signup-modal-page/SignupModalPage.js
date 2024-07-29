@@ -3,6 +3,7 @@ import TextField from "@mui/material/TextField";
 import { Close } from "@mui/icons-material";
 import { useState } from "react";
 import UserService from '../../services/user.service';
+import { url } from '../../data/url';
 import "./SignupModalPage.css";
 
 
@@ -71,7 +72,7 @@ const SignupModalPage = ({ closeModal }) => {
         setRpasswordError(false);
 
         fetch(
-            'http://localhost:8080/auth/signup', {
+            `${url}/auth/signup`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',

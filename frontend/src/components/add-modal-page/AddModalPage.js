@@ -4,6 +4,7 @@ import { Close } from "@mui/icons-material";
 import { useState } from "react";
 import { currentUser } from "../../data/user";
 import { posts } from "../../data/posts";
+import { url } from "../../data/url";
 
 const AddModalPage = ({ closeModal }) => {
     const [num, setNum] = useState(0);
@@ -22,7 +23,7 @@ const AddModalPage = ({ closeModal }) => {
         setNum(e.target.value);
     }
     const postNew = () => {
-        fetch('http://localhost:8080/posts/', {
+        fetch(`${url}/posts/`, {
             method: "POST",
             headers: {
                 'Accept': 'application/json',

@@ -5,6 +5,7 @@ import { useState } from "react";
 import "./ReplyModal.css";
 import { currentUser } from "../../data/user";
 import { posts } from "../../data/posts";
+import { url } from "../../data/url";
 
 const ReplyModal = ({ closeModal, parentId }) => {
     const [num, setNum] = useState(0);
@@ -28,7 +29,7 @@ const ReplyModal = ({ closeModal, parentId }) => {
     }
 
     const reply = () => {
-        fetch('http://localhost:8080/posts/reply', {
+        fetch(`${url}/posts/reply`, {
             method: "POST",
             headers: {
                 'Accept': 'application/json',

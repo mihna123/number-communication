@@ -8,7 +8,7 @@ import postsRoute from './routes/posts.route.mjs';
 import * as UserService from './services/user.service.mjs';
 
 const app = express();
-const port = 8080;
+const port = 80;
 const mongoUri = process.env.MONGO_URI;
 
 const clientOptions = {
